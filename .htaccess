@@ -1,0 +1,3 @@
+# Serve .dmg with the correct MIME type so browsers/clients identify it as
+# an Apple disk image instead of text/plain.
+AddType application/x-apple-diskimage .dmg

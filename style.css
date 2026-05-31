@@ -563,3 +563,80 @@ footer {
     font-size: 0.78rem;
   }
 }
+
+/* ---- conversational prose blocks ---- */
+.origin {
+  margin: 0 0 2.4rem;
+  max-width: 38rem;
+}
+.origin p {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(1.05rem, 1.4vw, 1.18rem);
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 1rem;
+  font-weight: 400;
+}
+.origin p:last-child {
+  margin-bottom: 0;
+}
+.origin em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.specimen-lead {
+  margin: 0 0 1.6rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  max-width: 52ch;
+}
+
+.install-intro {
+  margin: 0 0 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+}
+
+.honest {
+  max-width: 56ch;
+}
+.honest p {
+  font-family: 'Newsreader', serif;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 1.1rem;
+}
+.honest p:last-child { margin-bottom: 0; }
+.honest em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.checks-prose {
+  font-family: 'Newsreader', serif;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink);
+  margin: 0 0 1.2rem;
+  max-width: 60ch;
+}
+.checks-prose:last-of-type { margin-bottom: 0; }
+.checks-prose em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.source-prose {
+  font-family: 'Newsreader', serif;
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  margin: 0 0 1.6rem;
+  max-width: 60ch;
+  font-style: italic;
+}

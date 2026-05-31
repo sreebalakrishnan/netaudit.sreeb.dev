@@ -1,6 +1,8 @@
 # netaudit.sreeb.dev
 
-Landing page + download host for [NetAudit](https://github.com/sreebalakrishnan/netaudit) (a native macOS network audit + Wi-Fi safety checker).
+Landing page + download host for [NetAudit](https://github.com/sreebalakrishnan/netaudit) — a native macOS **desktop (GUI) app** for network auditing + Wi-Fi safety checking.
+
+> **NetAudit is a GUI application, not a command-line tool.** You install it into `/Applications` and launch it like any other Mac app (double-click, or open from Launchpad/Spotlight). The `install.sh` one-liner and Homebrew cask below are just convenience ways to *download and install* the app — they don't run it from the terminal. NetAudit itself is built in Ruby.
 
 Deployed via Hostinger Git deploy.
 

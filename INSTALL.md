@@ -50,6 +50,32 @@ This strips the "downloaded from the internet" tag that triggers Gatekeeper. Aft
 - A **status dot** (🟢 / 🟡 / 🔴) appears in your menu bar (top-right)
 - Click the menu bar dot to see the verdict at a glance, save a report, or quit
 
+## CLI vs GUI
+
+NetAudit ships a single executable that works two ways:
+
+```bash
+netaudit              # run the audit in the terminal, print the verdict, exit
+netaudit --json       # same, machine-readable (good for scripts / cron)
+netaudit gui          # launch the menu-bar + window GUI (same as: open -a NetAudit)
+```
+
+With no arguments and no subcommand, NetAudit opens the GUI — so double-clicking
+the app in Finder behaves exactly as before.
+
+**Where does the `netaudit` command come from?**
+
+- **Homebrew** (`brew install --cask netaudit`) and the **curl one-liner** both put
+  a `netaudit` symlink on your `PATH` automatically (the cask uses a `binary`
+  stanza; the installer symlinks into `/opt/homebrew/bin`, `/usr/local/bin`, or
+  `~/.local/bin`).
+- **Manual DMG install** (drag-to-Applications) only installs the GUI. To get the
+  terminal command too, symlink it yourself:
+
+  ```bash
+  ln -sf "/Applications/NetAudit.app/Contents/MacOS/netaudit" /usr/local/bin/netaudit
+  ```
+
 ## 5. Why does macOS warn?
 
 Distributing an app without a Gatekeeper warning requires:
@@ -65,6 +91,9 @@ NetAudit is a personal project shared informally — none of those are in place.
 ```bash
 # Delete the app
 rm -rf /Applications/NetAudit.app
+
+# Remove the CLI symlink (wherever it landed)
+rm -f /opt/homebrew/bin/netaudit /usr/local/bin/netaudit ~/.local/bin/netaudit
 
 # Optional: delete the database and reports
 rm -rf ~/.netaudit

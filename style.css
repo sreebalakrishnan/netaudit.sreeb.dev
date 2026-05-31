@@ -1,0 +1,70 @@
+/* Placeholder — full design coming. */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #0b0d10;
+  color: #e6e8eb;
+  font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+}
+main {
+  max-width: 640px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+h1 {
+  font-size: 32px;
+  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+}
+h1::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: #6ee7b7;
+  border-radius: 50%;
+  margin-left: 10px;
+  vertical-align: 6px;
+}
+.tagline {
+  color: #8a93a0;
+  font-size: 17px;
+  margin: 0 0 36px;
+}
+.install {
+  margin: 0 0 8px;
+  color: #8a93a0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+pre {
+  background: #14171c;
+  border: 1px solid #232932;
+  border-radius: 8px;
+  padding: 14px 18px;
+  overflow-x: auto;
+  margin: 0 0 24px;
+}
+code {
+  font: 14px/1.4 "SF Mono", ui-monospace, Menlo, monospace;
+  color: #e6e8eb;
+}
+.manual {
+  font-size: 14px;
+  color: #8a93a0;
+  margin: 0 0 12px;
+}
+.source {
+  font-size: 13px;
+  color: #5e6776;
+  margin: 40px 0 0;
+}
+a {
+  color: #6ee7b7;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}

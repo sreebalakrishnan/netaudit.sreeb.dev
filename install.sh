@@ -17,8 +17,14 @@
 # NetAudit.app is in /Applications.
 set -euo pipefail
 
-# Where the DMG lives. Override with NETAUDIT_DMG_URL=... if you mirror it.
-DMG_URL="${NETAUDIT_DMG_URL:-https://netaudit.sreeb.dev/NetAudit.dmg}"
+# Where the DMG lives. Override with NETAUDIT_DMG_URL=... to pin a version/mirror.
+#
+# The canonical home for DMGs is GitHub Releases in the netaudit (app) repo (see
+# README → "Per-release flow"). Once NetAudit is published there with an asset
+# named NetAudit.dmg, switch the default to the self-maintaining "latest" URL:
+#   https://github.com/sreebalakrishnan/netaudit/releases/latest/download/NetAudit.dmg
+# Until then, default to the current DMG served from the site.
+DMG_URL="${NETAUDIT_DMG_URL:-https://netaudit.sreeb.dev/NetAudit-0.8.0.dmg}"
 
 APP_NAME="NetAudit.app"
 DEST="/Applications/$APP_NAME"

@@ -113,7 +113,9 @@ cask "netaudit" do
   version "0.8.0"
   sha256 "..."                       # shasum -a 256 NetAudit-0.8.0.dmg
 
-  url "https://netaudit.sreeb.dev/NetAudit-#{version}.dmg"
+  # DMGs are GitHub Release assets in the netaudit repo (not committed to the
+  # site repo). Point at the versioned asset:
+  url "https://github.com/sreebalakrishnan/netaudit/releases/download/v#{version}/NetAudit-#{version}.dmg"
   name "NetAudit"
   desc "Should I join this Wi-Fi? — network + Wi-Fi safety checker"
   homepage "https://netaudit.sreeb.dev"

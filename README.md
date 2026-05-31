@@ -81,3 +81,7 @@ shasum -a 256 NetAudit-X.Y.Z.dmg            # paste into the cask
 ```
 
 No DMG copy, no `install.sh`/`INSTALL.md` duplication across repos.
+
+To make step 1+2 fully automatic (one `git tag` builds the DMG, publishes the
+release, and opens the tap bump PR), see [`docs/release-automation.md`](docs/release-automation.md)
+— a drop-in GitHub Actions workflow for the `netaudit` repo.

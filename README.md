@@ -10,9 +10,20 @@ Deployed via Hostinger Git deploy.
 |---|---|
 | `index.html` + `style.css` | Landing page (placeholder — to be designed) |
 | `NetAudit-0.8.0.dmg` | Current release. Linked from the page; pulled by `install.sh`; pulled by the Homebrew cask. |
-| `install.sh` | One-line installer (`curl … \| bash`). Downloads the DMG, copies the .app into /Applications, strips Gatekeeper quarantine. |
-| `INSTALL.md` | Manual install guide for people who'd rather double-click the DMG. |
+| `install.sh` | One-line installer (`curl … \| bash`). Downloads the DMG, copies the .app into /Applications, strips Gatekeeper quarantine, and symlinks the `netaudit` CLI onto `PATH`. |
+| `INSTALL.md` | Manual install guide for people who'd rather double-click the DMG. Includes CLI-vs-GUI usage. |
+| `docs/cli-and-gui.md` | Spec for shipping NetAudit as both a `netaudit` CLI and the GUI from one Homebrew cask (covers the source-repo entry point + the cask `binary` stanza). |
 | `favicon.icns` | App icon (also usable as og:image). |
+
+## CLI + GUI from one install
+
+A Homebrew user runs one command and gets both a `netaudit` terminal command and
+the menu-bar GUI. The mechanism is a single cask with a `binary` stanza (no
+separate formula); the app's entry point dispatches on `argv` — subcommand/flags
+run the audit in the terminal, no args (or `netaudit gui`) launch the GUI. The
+distribution side (`install.sh`, landing page, `INSTALL.md`) lives here; the
+entry-point and cask changes live in the source and tap repos — see
+[`docs/cli-and-gui.md`](docs/cli-and-gui.md).
 
 ## Per-release update flow
 

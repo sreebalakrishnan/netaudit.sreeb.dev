@@ -3,24 +3,165 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NetAudit — peek at the network before you trust it</title>
-<meta name="description" content="A native macOS app that tells you, in plain English, whether the Wi-Fi you just joined is safe + fast + private.">
-<link rel="icon" type="image/x-icon" href="favicon.icns">
-<link rel="stylesheet" href="style.css">
+<title>NetAudit · should I join this Wi-Fi?</title>
+<meta name="description" content="A native Mac app that checks the network you just joined and tells you, in plain English, whether it's safe to use.">
+<meta name="author" content="Sree Balakrishnan">
+
+<meta property="og:title" content="NetAudit · should I join this Wi-Fi?">
+<meta property="og:description" content="A pocket auditor for café Wi-Fi. Plain-English verdict + LAN device scan. Native Mac app.">
+<meta property="og:url" content="https://netaudit.sreeb.dev">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://netaudit.sreeb.dev">
+<link rel="icon" href="/favicon.icns">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..600,30..100;1,9..144,300..600,30..100&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
+
 <main>
-  <h1>NetAudit</h1>
-  <p class="tagline">A native macOS app for checking whether the Wi-Fi you just joined is safe, fast, and private — before you do anything sensitive on it.</p>
 
-  <p class="install"><strong>One-line install:</strong></p>
-  <pre><code>curl -fsSL https://netaudit.sreeb.dev/install.sh | bash</code></pre>
+  <header class="topbar fade-in">
+    <span class="topbar-name">NetAudit</span>
+    <span class="domain">netaudit.sreeb.dev</span>
+  </header>
 
-  <p class="manual">Or download the DMG and drag <strong>NetAudit.app</strong> into your Applications folder: <a href="NetAudit-0.8.0.dmg">NetAudit-0.8.0.dmg</a> (35 MB). First-launch instructions: <a href="INSTALL.md">INSTALL.md</a>.</p>
+  <section class="hero" aria-label="Introduction">
+    <div class="kicker fade-in d1">A pocket auditor for café Wi-Fi</div>
+    <h1 class="fade-in d2">Should I join this <span class="em">Wi-Fi</span>?</h1>
+    <p class="tagline fade-in d3">
+      A native Mac app that quietly checks the network you just joined — and tells you, in plain English, <span class="em">whether it's safe to use</span>.
+    </p>
+    <p class="hero-cta fade-in d4">
+      <span class="cta-label">One line to install</span>
+      <a class="install-cta" href="#install">
+        <span class="prompt">$</span>
+        <span class="cmd">brew install sreebalakrishnan/netaudit/netaudit</span>
+        <span class="hint">or →</span>
+      </a>
+    </p>
+  </section>
 
-  <p class="source">Source: <a href="https://github.com/sreebalakrishnan/netaudit">github.com/sreebalakrishnan/netaudit</a></p>
+  <section class="reveal" aria-label="What it shows">
+    <div class="section-label">What you actually see</div>
+    <h2>One sentence at the <span class="em">top</span>, details if you want them</h2>
+    <p class="specimen-intro">
+      Every signal rolls into a single plain-English verdict. Click any tile beneath it to see the raw numbers. The same status — green, yellow, or red — sits in your menu bar so you can peek without opening anything.
+    </p>
 
-  <!-- Placeholder layout. Designed landing page coming soon. -->
+    <div class="verdict-specimen">
+      <div class="verdict-headline">
+        <span class="verdict-dot"></span>
+        This network looks safe.
+        <span class="verdict-ssid">on "café-guest"</span>
+      </div>
+      <ul>
+        <li>Encrypted Wi-Fi.</li>
+        <li>Fast enough for HD video.</li>
+        <li>Snappy response — calls and games should feel smooth.</li>
+        <li>No tampering signs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="reveal" id="install" aria-label="Install">
+    <div class="section-label">Install</div>
+    <h2>Three ways <span class="em">in</span></h2>
+    <p class="workbench-intro">macOS 11+ on Apple Silicon or Intel. Free, open source, runs entirely on your machine — nothing leaves your network.</p>
+
+    <div class="workbench install-list">
+      <article class="bench-item">
+        <div class="install-row-head">
+          <span class="install-method">Homebrew</span>
+          <span class="bench-badge">recommended</span>
+        </div>
+        <p class="bench-desc">One command, silent install, automatic updates via <code>brew upgrade</code>.</p>
+        <a class="install-cmd" href="https://github.com/sreebalakrishnan/homebrew-netaudit">brew install sreebalakrishnan/netaudit/netaudit</a>
+      </article>
+
+      <article class="bench-item">
+        <div class="install-row-head">
+          <span class="install-method">curl one-liner</span>
+        </div>
+        <p class="bench-desc">No Homebrew required. Downloads the latest DMG, copies the app into <code>/Applications</code>, strips the Gatekeeper quarantine so first launch is silent.</p>
+        <a class="install-cmd" href="/install.sh">curl -fsSL https://netaudit.sreeb.dev/install.sh | bash</a>
+      </article>
+
+      <article class="bench-item">
+        <div class="install-row-head">
+          <span class="install-method">Manual DMG</span>
+        </div>
+        <p class="bench-desc">Drag-to-Applications. First launch needs a one-time right-click → Open — see <a href="/INSTALL.md" class="bench-domain" style="font-size: 0.82rem;">INSTALL.md</a> for why.</p>
+        <a class="install-cmd" href="/NetAudit-0.8.0.dmg" download>NetAudit-0.8.0.dmg · 35 MB</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="reveal" aria-label="What it checks">
+    <div class="section-label">What it checks</div>
+    <h2>Eleven signals, <span class="em">one verdict</span></h2>
+    <p class="signals-intro">All probes are rootless — no admin password, no privacy entitlements. The app uses only what macOS exposes to any regular user.</p>
+
+    <div class="signals">
+      <div class="signal"><div class="signal-name">Wi-Fi crypto</div><div class="signal-desc">Encryption type (WPA2 / WPA3 / open / older) + signal strength.</div></div>
+      <div class="signal"><div class="signal-name">Internet reach</div><div class="signal-desc">Captive portal detection via Apple's well-known hotspot probe.</div></div>
+      <div class="signal"><div class="signal-name">Public IP</div><div class="signal-desc">Your apparent IP, city, country, ISP — so you know what the rest of the internet sees.</div></div>
+      <div class="signal"><div class="signal-name">DNS resolver</div><div class="signal-desc">Identifies the resolver (Cloudflare / Google / Quad9 / router) and flags unfamiliar ones.</div></div>
+      <div class="signal"><div class="signal-name">Download</div><div class="signal-desc">A ~5 MB test download, with a fallback chain so it works almost everywhere. Skippable for metered networks.</div></div>
+      <div class="signal"><div class="signal-name">Response time</div><div class="signal-desc">Latency + jitter to 1.1.1.1 and the gateway. The jitter number is what tells you whether calls will stutter.</div></div>
+      <div class="signal"><div class="signal-name">Safety check</div><div class="signal-desc">Looks at the local ARP table for duplicate MACs and locally-administered gateway MAC — both signs of interception or a rogue access point.</div></div>
+      <div class="signal"><div class="signal-name">Path</div><div class="signal-desc">A short traceroute — how many hops your traffic takes to reach the public internet.</div></div>
+      <div class="signal"><div class="signal-name">VPN</div><div class="signal-desc">Detects when the default route is a tunnel interface (utun, ipsec, ppp).</div></div>
+      <div class="signal"><div class="signal-name">Private Relay</div><div class="signal-desc">Reports whether Apple iCloud+ Private Relay is reachable on this network.</div></div>
+      <div class="signal"><div class="signal-name">LAN devices</div><div class="signal-desc">Discovers every device on your subnet and labels each with type and brand — phones, computers, TVs, speakers, printers, IoT.</div></div>
+    </div>
+  </section>
+
+  <section class="reveal" aria-label="Source">
+    <div class="section-label">Source</div>
+    <h2>Open, <span class="em">on GitHub</span></h2>
+    <p class="bench-desc" style="max-width: 60ch; margin-bottom: 1.4rem;">
+      Python backend (FastAPI + rumps menu-bar + WKWebView), bundled as a native <code>.app</code> via py2app. No telemetry, no analytics, no network calls beyond what the probes need.
+    </p>
+    <p class="hero-cta">
+      <a class="cta-link" href="https://github.com/sreebalakrishnan/netaudit">github.com/sreebalakrishnan/netaudit <span class="arrow">→</span></a>
+    </p>
+  </section>
+
+  <footer>
+    <div class="colophon-row">
+      <div class="colophon-left">
+        <span>© 2026</span>
+        <span>Made with intent</span>
+      </div>
+      <div class="colophon-right">
+        <span class="signature">— Sree B.</span>
+        <span class="alias">gnuyoga</span>
+      </div>
+    </div>
+    <div class="footer-workflow">
+      Built by human voice · refined by prompts · made with AI agents · human reviewed · then shipped.
+    </div>
+  </footer>
+
 </main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>

@@ -57,7 +57,7 @@
   </section>
 
   <section class="reveal" aria-label="What it tells you">
-    <p class="specimen-lead">Here's what it tells you. The same dot sits in the menu bar so you can peek without opening anything.</p>
+    <p class="specimen-lead">Here's what it tells you. The same verdict — green, amber or red — rides along in the menu bar as a little Wi-Fi mark, so you can peek without opening anything.</p>
 
     <div class="verdict-specimen">
       <div class="verdict-headline">
@@ -126,7 +126,7 @@
           <span class="install-method">Manual DMG</span>
         </div>
         <p class="bench-desc">If you'd rather drag the app into <code>/Applications</code> yourself. First launch needs right-click → Open (the long story is in <a href="/INSTALL.md" class="bench-domain" style="font-size: 0.82rem;">INSTALL.md</a>).</p>
-        <a class="install-cmd" href="/NetAudit-0.8.0.dmg" download>NetAudit-0.8.0.dmg · 35 MB</a>
+        <a class="install-cmd" href="https://github.com/sreebalakrishnan/netaudit/releases/latest/download/NetAudit.dmg" download>NetAudit.dmg · latest · ~36 MB</a>
       </article>
     </div>
   </section>
@@ -155,6 +155,9 @@
     </p>
     <p class="checks-prose">
       Plus the obvious ones — encryption type, download speed, public IP and geo, captive portal detection, whether a VPN is on, whether Apple Private Relay is reachable. And a LAN scan that labels every device on your network as a phone, TV, computer, printer or speaker, using mDNS / SSDP / port profiling.
+    </p>
+    <p class="checks-prose">
+      It also knows <em>your own</em> networks. On a personal hotspot — your phone, your hardware — it won't cry wolf about the "rogue" gateway MAC the way a café check would; it just says <em>trusted</em>. Mark a network as <em>home</em> or <em>office</em> (give it a name, even — handy since recent macOS hides the SSID) and it does the same: skips the public-Wi-Fi nags, but still speaks up if something's genuinely off — an open network, a captive-portal sign-in, a hijacked DNS resolver.
     </p>
     <p class="checks-prose">
       Everything runs locally. The probes are rootless, so no password prompt.

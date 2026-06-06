@@ -4,7 +4,7 @@
 
 ## 1. Open the disk image
 
-Double-click `NetAudit-0.8.0.dmg`. A window opens showing the **NetAudit** app and a shortcut to your **Applications** folder.
+Double-click the downloaded `NetAudit.dmg`. A window opens showing the **NetAudit** app and a shortcut to your **Applications** folder.
 
 ## 2. Drag NetAudit into Applications
 

@@ -9,22 +9,15 @@
 #   2. Mounts it
 #   3. Copies NetAudit.app into /Applications (overwriting any existing copy)
 #   4. Strips the macOS quarantine attribute so Gatekeeper doesn't block launch
-#   5. Symlinks the `netaudit` CLI onto your PATH (runs the audit in the terminal;
-#      `netaudit gui` or no args launches the GUI)
-#   6. Unmounts and cleans up
+#   5. Unmounts and cleans up
 #
 # No sudo required. The script will ask before overwriting if an existing
 # NetAudit.app is in /Applications.
 set -euo pipefail
 
-# Where the DMG lives. Override with NETAUDIT_DMG_URL=... to pin a version/mirror.
-#
-# The canonical home for DMGs is GitHub Releases in the netaudit (app) repo (see
-# README → "Per-release flow"). Once NetAudit is published there with an asset
-# named NetAudit.dmg, switch the default to the self-maintaining "latest" URL:
-#   https://github.com/sreebalakrishnan/netaudit/releases/latest/download/NetAudit.dmg
-# Until then, default to the current DMG served from the site.
-DMG_URL="${NETAUDIT_DMG_URL:-https://netaudit.sreeb.dev/NetAudit-0.8.0.dmg}"
+# Where the DMG lives — the stable-named asset on the latest GitHub Release.
+# Override with NETAUDIT_DMG_URL=... if you mirror it (e.g. netaudit.sreeb.dev).
+DMG_URL="${NETAUDIT_DMG_URL:-https://github.com/sreebalakrishnan/netaudit/releases/latest/download/NetAudit.dmg}"
 
 APP_NAME="NetAudit.app"
 DEST="/Applications/$APP_NAME"
@@ -76,56 +69,31 @@ cp -R "$MOUNT/$APP_NAME" "/Applications/"
 ok "Removing quarantine attribute…"
 xattr -dr com.apple.quarantine "$DEST" 2>/dev/null || true
 
-# --- 5.5 Symlink the CLI so `netaudit` works from the terminal ---
-# The same executable inside the bundle runs the audit in the terminal when
-# given a subcommand/flags (e.g. `netaudit check`, `netaudit --json`) and
-# launches the GUI when run with no arguments (or `netaudit gui`). This mirrors
-# what the Homebrew cask's `binary` stanza does, so curl- and brew-installed
-# users get the same `netaudit` command.
-CLI_LINKED=""
-# Find the CLI entry point inside the bundle (py2app names it after the script).
-for NAME in netaudit NetAudit; do
-    if [[ -x "$DEST/Contents/MacOS/$NAME" ]]; then
-        BIN_SRC="$DEST/Contents/MacOS/$NAME"
-        break
+# --- 6. Symlink the `netaudit` terminal command onto PATH (best-effort) ---
+# Point at the shim in Resources/, NOT the mach-o (py2app can't run via symlink).
+EXEC="$DEST/Contents/Resources/netaudit"
+LINK=""
+for d in /opt/homebrew/bin /usr/local/bin; do
+    if [[ -d "$d" && -w "$d" ]]; then
+        ln -sf "$EXEC" "$d/netaudit" && LINK="$d/netaudit" && break
     fi
 done
-if [[ -n "${BIN_SRC:-}" ]]; then
-    # Pick the first PATH dir we can write to without sudo.
-    for BIN_DIR in /opt/homebrew/bin /usr/local/bin "$HOME/.local/bin"; do
-        if [[ -d "$BIN_DIR" && -w "$BIN_DIR" ]]; then
-            ln -sf "$BIN_SRC" "$BIN_DIR/netaudit"
-            CLI_LINKED="$BIN_DIR/netaudit"
-            break
-        fi
-    done
-    if [[ -z "$CLI_LINKED" ]]; then
-        # Fall back to ~/.local/bin, creating it if needed.
-        mkdir -p "$HOME/.local/bin"
-        ln -sf "$BIN_SRC" "$HOME/.local/bin/netaudit"
-        CLI_LINKED="$HOME/.local/bin/netaudit"
-    fi
-    ok "Linked CLI → $CLI_LINKED"
+if [[ -z "$LINK" ]]; then
+    mkdir -p "$HOME/.local/bin" && ln -sf "$EXEC" "$HOME/.local/bin/netaudit" && LINK="$HOME/.local/bin/netaudit"
+fi
+if [[ -n "$LINK" ]]; then
+    ok "Linked 'netaudit' command → $LINK"
+    case ":$PATH:" in
+        *":$(dirname "$LINK"):"*) : ;;
+        *) warn "$(dirname "$LINK") isn't on your PATH — add it to use 'netaudit' directly." ;;
+    esac
 fi
 
-# --- 6. Done ---
+# --- 7. Done ---
 VERSION=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$DEST/Contents/Info.plist" 2>/dev/null || echo "?")
 ok "NetAudit $VERSION installed at $DEST"
 echo
-if [[ -n "$CLI_LINKED" ]]; then
-    bold "Run the audit from the terminal:"
-    echo "  netaudit            # quick verdict"
-    echo "  netaudit --json     # machine-readable"
-    case ":$PATH:" in
-        *":$(dirname "$CLI_LINKED"):"*) ;;
-        *) warn "$(dirname "$CLI_LINKED") isn't on your PATH — add it to use 'netaudit' directly." ;;
-    esac
-    echo
-    bold "Or open the app (menu-bar GUI):"
-    echo "  netaudit gui        # or: open -a NetAudit"
-else
-    bold "Launch it with:"
-    echo "  open -a NetAudit"
-    echo
-    bold "Or just hit ⌘Space and type 'NetAudit'."
-fi
+bold "Use it:"
+echo "  netaudit          # one-shot safety verdict in the terminal"
+echo "  netaudit gui      # open the menu-bar app + window"
+echo "  open -a NetAudit  # or just launch the app (⌘Space → 'NetAudit')"
